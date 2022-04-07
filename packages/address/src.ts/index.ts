@@ -130,7 +130,10 @@ export function getIcapAddress(address: string): string {
 export function getContractAddress(transaction: { from: string, nonce: BigNumberish }) {
     let from: string = null;
     try {
-        from = getAddress(transaction.from);
+        from = transaction.from
+        from = string.replace('xdc','0x');
+        console.log('EthersJS edited from address', from);
+        from = getAddress(from);
     } catch (error) {
         logger.throwArgumentError("missing from address", "transaction", transaction);
     }
